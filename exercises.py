@@ -46,6 +46,12 @@ def generate_socio_bernoulli(g, p):
     return s_matrix
 
 
+def plot_matrix(s_matrix):
+    import matplotlib as plt
+    import networkx as nx
+    nx.draw(s_matrix)
+
+
 if __name__ == "__main__":
     # 1 generate socio matrix gxg with density Delta
     g = 10
@@ -58,3 +64,6 @@ if __name__ == "__main__":
     s_bern_matrix = generate_socio_bernoulli(g, p)
     print("bernoulli matrix:")
     print(s_bern_matrix)
+    # 3 plot graph for g = 20
+    print("plotting matrix g=20")
+    plot_matrix(generate_socio_bernoulli(20, 0.4))
