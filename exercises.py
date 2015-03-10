@@ -49,7 +49,7 @@ def generate_socio_bernoulli(g, p):
 def plot_matrix(s_matrix):
     import matplotlib as plt
     import networkx as nx
-    nx.draw(s_matrix)
+    nx.draw(nx.Graph(s_matrix))
 
 
 if __name__ == "__main__":
@@ -64,6 +64,12 @@ if __name__ == "__main__":
     s_bern_matrix = generate_socio_bernoulli(g, p)
     print("bernoulli matrix:")
     print(s_bern_matrix)
-    # 3 plot graph for g = 20
-    print("plotting matrix g=20")
-    plot_matrix(generate_socio_bernoulli(20, 0.4))
+    DO_PLOT = False
+    if DO_PLOT:
+        # 3 plot graph for g = 20
+        print("plotting matrix g=20")
+        plot_matrix(generate_socio_bernoulli(20, 0.4))
+        # 4 same for g = 10^3
+        print("plotting matrix g=10^3")
+        plot_matrix(generate_socio_bernoulli(1000, 0.4))
+    # 5 create function which generates dataset containing x_i ~ N(10,4) for i = 1,...,i = g
