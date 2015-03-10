@@ -23,11 +23,26 @@ def generate_socio_matrix(g, delta):
     for _ in range(nr_links):
         c_x, c_y = (0, 0)
         while (c_x == c_y) or (s_matrix[c_x][c_y] == 1):
-            #print("previous candidate ", c_x, c_y, "unfit, retrying")
-            #print("current matrix:")
-            #print(s_matrix)
             c_x, c_y = random.randint(0, g-1), random.randint(0, g-1)
         s_matrix[c_x][c_y] = 1
+    return s_matrix
+
+
+def generate_socio_bernoulli(g, p):
+    """
+    generate socio matrix, tie determined by bernoulli(p)
+    :param g: matrix size
+    :param p: bernoulli parameter
+    :return:
+    """
+    random.seed(42)
+    s_matrix = np.zeros((g, g))
+    for row in range(g):
+        for col in range(row):
+            rand = random.random()
+            if rand <= p:
+                s_matrix[row][col] = 1
+                s_matrix[col][row] = 1
     return s_matrix
 
 
@@ -38,3 +53,8 @@ if __name__ == "__main__":
     s_matrix = generate_socio_matrix(g, delta)
     print("socio matrix:")
     print(s_matrix)
+    # 2 generate random socio matrix, each tie is drawn from Bernoulli 0/1
+    p = 0.5
+    s_bern_matrix = generate_socio_bernoulli(g, p)
+    print("bernoulli matrix:")
+    print(s_bern_matrix)
